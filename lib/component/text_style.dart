@@ -1,11 +1,14 @@
-import 'package:currency/component/my_colors.dart';
 import 'package:flutter/material.dart';
+
+import 'my_colors.dart';
+
 
 TextStyle appBarTextStyle = const TextStyle(
     fontFamily: 'Dana',
     fontSize: 20,
     fontWeight: FontWeight.w700,
     color: SolidColors.appBarTextColor);
+
 TextStyle headline1TextStyle = const TextStyle(
   fontFamily: 'Dana',
   fontSize: 18,
@@ -17,3 +20,8 @@ TextStyle descriptionTextStyle = const TextStyle(
   fontSize: 13,
   fontWeight: FontWeight.w300,
 );
+TextStyle listViewTitleTextStyle = const TextStyle(
+    fontFamily: 'Dana',
+    fontSize: 14,
+    fontWeight: FontWeight.w700,
+    color: Colors.white);
