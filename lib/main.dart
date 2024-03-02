@@ -58,21 +58,34 @@ class MyApp extends StatelessWidget {
           padding: const EdgeInsets.all(20.0),
           child: Column(
             children: [
+              //headline 1, first row of main body
               Row(
                 children: [
+                  //question mark
                   SvgPicture.asset(
                     "assets/images/question-circle-svgrepo-com 1.svg",
                     width: 35,
                     height: 35,
                   ),
+                  //space
                   const SizedBox(
                     width: 8,
                   ),
                   Text(
                     "نرخ ارز آزاد چیست؟",
-                    style: headline1,
+                    style: headline1TextStyle.copyWith(
+                        color: SolidColors.headline1Color),
                   )
                 ],
+              ),
+              //description
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  "نرخ ارز ها از معاملات نقدی و رایج روزانه است. معاملات نقدی معاملاتی هستند که خریدار و فروشنده به محض انجام معامله، ارز و ریال را با هم تبادل می نمایند.",
+                  style: descriptionTextStyle.copyWith(
+                      color: SolidColors.descriptionColor),
+                ),
               )
             ],
           ),

@@ -6,8 +6,14 @@ TextStyle appBarTextStyle = const TextStyle(
     fontSize: 20,
     fontWeight: FontWeight.w700,
     color: SolidColors.appBarTextColor);
-TextStyle headline1 = const TextStyle(
-    fontFamily: 'Dana',
-    fontSize: 18,
-    fontWeight: FontWeight.w700,
-    color: SolidColors.appBarTextColor);
+TextStyle headline1TextStyle = const TextStyle(
+  fontFamily: 'Dana',
+  fontSize: 18,
+  fontWeight: FontWeight.w700,
+);
+
+TextStyle descriptionTextStyle = const TextStyle(
+  fontFamily: 'Dana',
+  fontSize: 13,
+  fontWeight: FontWeight.w300,
+);
