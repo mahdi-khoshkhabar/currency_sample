@@ -3,6 +3,11 @@ import 'package:flutter/material.dart';
 
 TextStyle appBarTextStyle = const TextStyle(
     fontFamily: 'Dana',
+    fontSize: 20,
+    fontWeight: FontWeight.w700,
+    color: SolidColors.appBarTextColor);
+TextStyle headline1 = const TextStyle(
+    fontFamily: 'Dana',
     fontSize: 18,
     fontWeight: FontWeight.w700,
     color: SolidColors.appBarTextColor);

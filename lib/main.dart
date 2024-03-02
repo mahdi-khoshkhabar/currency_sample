@@ -54,8 +54,28 @@ class MyApp extends StatelessWidget {
             )
           ]),
         ),
-        body: const Column(
-          children: [],
+        body: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  SvgPicture.asset(
+                    "assets/images/question-circle-svgrepo-com 1.svg",
+                    width: 35,
+                    height: 35,
+                  ),
+                  const SizedBox(
+                    width: 8,
+                  ),
+                  Text(
+                    "نرخ ارز آزاد چیست؟",
+                    style: headline1,
+                  )
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );
