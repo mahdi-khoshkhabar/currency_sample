@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return MaterialApp(
       title: 'Localizations Sample App',
       localizationsDelegates: const [
@@ -61,129 +62,181 @@ class MyApp extends StatelessWidget {
         ),
         body: Padding(
           padding: const EdgeInsets.all(20.0),
-          child: Column(
-            children: [
-              //headline 1, first row of main body
-              Row(
-                children: [
-                  //question mark
-                  SvgPicture.asset(
-                    "assets/images/question-circle-svgrepo-com 1.svg",
-                    width: 35,
-                    height: 35,
-                  ),
-                  //space
-                  const SizedBox(
-                    width: 8,
-                  ),
-                  Text(
-                    "نرخ ارز آزاد چیست؟",
-                    style: headline1TextStyle.copyWith(
-                        color: SolidColors.headline1Color),
-                  )
-                ],
-              ),
-              //description
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  "نرخ ارز ها از معاملات نقدی و رایج روزانه است. معاملات نقدی معاملاتی هستند که خریدار و فروشنده به محض انجام معامله، ارز و ریال را با هم تبادل می نمایند.",
-                  style: descriptionTextStyle.copyWith(
-                      color: SolidColors.descriptionColor),
-                ),
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              //list view title
-              Container(
-                width: double.infinity,
-                height: 39,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(1000),
-                    color: SolidColors.listViewTitleColor),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+          child: SafeArea(
+            child: Column(
+              children: [
+                //headline 1, first row of main body
+                Row(
                   children: [
-                    Text(
-                      "نام آزاد ارز",
-                      style: listViewTitleTextStyle,
+                    //question mark
+                    SvgPicture.asset(
+                      "assets/images/question-circle-svgrepo-com 1.svg",
+                      width: 35,
+                      height: 35,
+                    ),
+                    //space
+                    const SizedBox(
+                      width: 8,
                     ),
                     Text(
-                      "قیمت",
-                      style: listViewTitleTextStyle,
-                    ),
-                    Text(
-                      "تغییرات",
-                      style: listViewTitleTextStyle,
-                    ),
+                      "نرخ ارز آزاد چیست؟",
+                      style: headline1TextStyle.copyWith(
+                          color: SolidColors.headline1Color),
+                    )
                   ],
                 ),
-              ),
-              //list view
-              SizedBox(
-                width: double.infinity,
-                height: 500,
-                child: ListView.separated(
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.only(top: 16),
-                        child: Container(
-                          width: double.infinity,
-                          height: 59,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(1000),
-                              color: Colors.white,
-                              border: Border.all(color: Colors.grey, width: 1)),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Text(
-                                "Data",
-                                style: listViewTextStyle,
-                              ),
-                              Text(
-                                "Data",
-                                style: listViewTextStyle,
-                              ),
-                              Text(
-                                "Data",
-                                style: listViewTextStyle,
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
-                    },
-                    separatorBuilder: (context, index) {
-                      return (index + 2) % 4 == 0
-                          ? Padding(
-                              padding: const EdgeInsets.only(top: 16),
-                              child: Container(
-                                width: double.infinity,
-                                height: 59,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(1000),
-                                    color: SolidColors.adBackGroundColor,
-                                    border: Border.all(
-                                        color: Colors.grey, width: 1)),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: [
-                                    Text(
-                                      "Ad",
-                                      style: listViewTitleTextStyle,
-                                    ),
-                                  ],
+                //description
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    "نرخ ارز ها از معاملات نقدی و رایج روزانه است. معاملات نقدی معاملاتی هستند که خریدار و فروشنده به محض انجام معامله، ارز و ریال را با هم تبادل می نمایند.",
+                    style: descriptionTextStyle.copyWith(
+                        color: SolidColors.descriptionColor),
+                  ),
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                //list view title
+                Container(
+                  width: double.infinity,
+                  height: 39,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(1000),
+                      color: SolidColors.listViewTitleColor),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Text(
+                        "نام آزاد ارز",
+                        style: listViewTitleTextStyle,
+                      ),
+                      Text(
+                        "قیمت",
+                        style: listViewTitleTextStyle,
+                      ),
+                      Text(
+                        "تغییرات",
+                        style: listViewTitleTextStyle,
+                      ),
+                    ],
+                  ),
+                ),
+                //list view
+                SizedBox(
+                  width: double.infinity,
+                  height: size.height / 1.9,
+                  child: ListView.separated(
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.only(top: 20),
+                          child: Container(
+                            width: double.infinity,
+                            height: 59,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(1000),
+                                color: Colors.white,
+                                border:
+                                    Border.all(color: Colors.grey, width: 1)),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Text(
+                                  "Data",
+                                  style: listViewTextStyle,
                                 ),
-                              ),
+                                Text(
+                                  "Data",
+                                  style: listViewTextStyle,
+                                ),
+                                Text(
+                                  "Data",
+                                  style: listViewTextStyle,
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                      separatorBuilder: (context, index) {
+                        return (index + 2) % 4 == 0
+                            ? Padding(
+                                padding: const EdgeInsets.only(top: 20),
+                                child: Container(
+                                  width: double.infinity,
+                                  height: 59,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(1000),
+                                      color: SolidColors.adBackGroundColor,
+                                      border: Border.all(
+                                          color: Colors.grey, width: 1)),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      Text(
+                                        "Ad",
+                                        style: listViewTitleTextStyle,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              )
+                            : const SizedBox.shrink();
+                      },
+                      itemCount: 20),
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                //update box
+                Container(
+                  width: double.infinity,
+                  height: size.height / 15.8,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(1000),
+                      color: SolidColors.updateBoxColor),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        width: size.width / 3,
+                        height: double.maxFinite,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(1000),
+                            color: SolidColors.updateBottomColor),
+                        child: Row(
+                          children: [
+                            IconButton(
+                                onPressed: () {},
+                                icon: const Icon(
+                                  Icons.refresh_rounded,
+                                  color: SolidColors.updateBottonIconColor,
+                                  size: 30,
+                                )),
+                            Text(
+                              "بروزرسانی",
+                              style: updateBottonTextStyle,
                             )
-                          : const SizedBox.shrink();
-                    },
-                    itemCount: 20),
-              )
-            ],
+                          ],
+                        ),
+                      ),
+                      Text(
+                        "آخرین بروزرسانی",
+                        style: updateBoxTextStyle,
+                      ),
+                      Text(
+                        "20:45",
+                        style: updateBoxTextStyle,
+                      ),
+                      SizedBox(
+                        width: size.width / 25,
+                      )
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),
