@@ -120,6 +120,7 @@ class MyApp extends StatelessWidget {
                   ],
                 ),
               ),
+              //list view
               SizedBox(
                 width: double.infinity,
                 height: 500,
@@ -132,21 +133,22 @@ class MyApp extends StatelessWidget {
                           height: 59,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(1000),
-                              color: Colors.green),
+                              color: Colors.white,
+                              border: Border.all(color: Colors.grey, width: 1)),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               Text(
                                 "Data",
-                                style: listViewTitleTextStyle,
+                                style: listViewTextStyle,
                               ),
                               Text(
                                 "Data",
-                                style: listViewTitleTextStyle,
+                                style: listViewTextStyle,
                               ),
                               Text(
                                 "Data",
-                                style: listViewTitleTextStyle,
+                                style: listViewTextStyle,
                               ),
                             ],
                           ),
@@ -154,25 +156,30 @@ class MyApp extends StatelessWidget {
                       );
                     },
                     separatorBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.only(top: 16),
-                        child: Container(
-                          width: double.infinity,
-                          height: 59,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(1000),
-                              color: Colors.red),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Text(
-                                "Ad",
-                                style: listViewTitleTextStyle,
+                      return (index + 2) % 4 == 0
+                          ? Padding(
+                              padding: const EdgeInsets.only(top: 16),
+                              child: Container(
+                                width: double.infinity,
+                                height: 59,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1000),
+                                    color: SolidColors.adBackGroundColor,
+                                    border: Border.all(
+                                        color: Colors.grey, width: 1)),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Text(
+                                      "Ad",
+                                      style: listViewTitleTextStyle,
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ],
-                          ),
-                        ),
-                      );
+                            )
+                          : const SizedBox.shrink();
                     },
                     itemCount: 20),
               )

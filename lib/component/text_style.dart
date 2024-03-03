@@ -20,8 +20,15 @@ TextStyle descriptionTextStyle = const TextStyle(
   fontSize: 13,
   fontWeight: FontWeight.w300,
 );
+
 TextStyle listViewTitleTextStyle = const TextStyle(
     fontFamily: 'Dana',
     fontSize: 14,
     fontWeight: FontWeight.w700,
     color: Colors.white);
+
+TextStyle listViewTextStyle = const TextStyle(
+    fontFamily: 'Dana',
+    fontSize: 14,
+    fontWeight: FontWeight.w700,
+    color: Colors.black);
