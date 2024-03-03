@@ -30,10 +30,13 @@ class MyApp extends StatelessWidget {
           elevation: 0,
           title:
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-            SvgPicture.asset(
-              "assets/images/money-bag-svgrepo-com 1.svg",
-              width: 41,
-              height: 41,
+            IconButton(
+              onPressed: () {},
+              icon: SvgPicture.asset(
+                "assets/images/money-bag-svgrepo-com 1.svg",
+                width: 35,
+                height: 35,
+              ),
             ),
             Padding(
               padding: const EdgeInsets.only(right: 12),
@@ -44,13 +47,15 @@ class MyApp extends StatelessWidget {
             ),
             Expanded(
               child: Align(
-                alignment: Alignment.centerLeft,
-                child: SvgPicture.asset(
-                  "assets/images/menu-svgrepo-com 1.svg",
-                  width: 37,
-                  height: 37,
-                ),
-              ),
+                  alignment: Alignment.centerLeft,
+                  child: IconButton(
+                    onPressed: () {},
+                    icon: SvgPicture.asset(
+                      "assets/images/menu-svgrepo-com 1.svg",
+                      width: 35,
+                      height: 35,
+                    ),
+                  )),
             )
           ]),
         ),
