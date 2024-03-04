@@ -26,40 +26,7 @@ class MyApp extends StatelessWidget {
       ],
       home: Scaffold(
         backgroundColor: SolidColors.backgroundColor,
-        appBar: AppBar(
-          backgroundColor: SolidColors.appBarBackgroundColor,
-          elevation: 0,
-          title:
-              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-            IconButton(
-              onPressed: () {},
-              icon: SvgPicture.asset(
-                "assets/images/money-bag-svgrepo-com 1.svg",
-                width: 35,
-                height: 35,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(right: 12),
-              child: Text(
-                "قیمت بروز سکه و ارز",
-                style: appBarTextStyle,
-              ),
-            ),
-            Expanded(
-              child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: IconButton(
-                    onPressed: () {},
-                    icon: SvgPicture.asset(
-                      "assets/images/menu-svgrepo-com 1.svg",
-                      width: 35,
-                      height: 35,
-                    ),
-                  )),
-            )
-          ]),
-        ),
+        appBar: appBar(),
         body: Padding(
           padding: const EdgeInsets.all(20.0),
           child: SafeArea(
@@ -98,140 +65,186 @@ class MyApp extends StatelessWidget {
                   height: 30,
                 ),
                 //list view title
-                Container(
-                  width: double.infinity,
-                  height: 39,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(1000),
-                      color: SolidColors.listViewTitleColor),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Text(
-                        "نام آزاد ارز",
-                        style: listViewTitleTextStyle,
-                      ),
-                      Text(
-                        "قیمت",
-                        style: listViewTitleTextStyle,
-                      ),
-                      Text(
-                        "تغییرات",
-                        style: listViewTitleTextStyle,
-                      ),
-                    ],
-                  ),
-                ),
+                listViewTitle(),
                 //list view
-                SizedBox(
-                  width: double.infinity,
-                  height: size.height / 1.9,
-                  child: ListView.separated(
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.only(top: 20),
-                          child: Container(
-                            width: double.infinity,
-                            height: 59,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(1000),
-                                color: Colors.white,
-                                border:
-                                    Border.all(color: Colors.grey, width: 1)),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                Text(
-                                  "Data",
-                                  style: listViewTextStyle,
-                                ),
-                                Text(
-                                  "Data",
-                                  style: listViewTextStyle,
-                                ),
-                                Text(
-                                  "Data",
-                                  style: listViewTextStyle,
-                                ),
-                              ],
-                            ),
-                          ),
-                        );
-                      },
-                      separatorBuilder: (context, index) {
-                        return (index + 2) % 4 == 0
-                            ? Padding(
-                                padding: const EdgeInsets.only(top: 20),
-                                child: Container(
-                                  width: double.infinity,
-                                  height: 59,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(1000),
-                                      color: SolidColors.adBackGroundColor,
-                                      border: Border.all(
-                                          color: Colors.grey, width: 1)),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: [
-                                      Text(
-                                        "Ad",
-                                        style: listViewTitleTextStyle,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              )
-                            : const SizedBox.shrink();
-                      },
-                      itemCount: 20),
-                ),
+                listView(size),
                 const SizedBox(
                   height: 15,
                 ),
                 //update box
-                Container(
-                  width: double.infinity,
-                  height: size.height / 15.8,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(1000),
-                      color: SolidColors.updateBoxColor),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                          width: size.width / 3,
-                          height: double.maxFinite,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(1000),
-                              color: SolidColors.updateBottomColor),
-                          child: TextButton.icon(
-                              onPressed: () {},
-                              icon: const Icon(Icons.refresh_rounded,
-                                  color: SolidColors.updateBottonIconColor,
-                                  size: 30),
-                              label: Text("بروزرسانی",
-                                  style: updateBottonTextStyle))
-                          ),
-                      Text(
-                        "آخرین بروزرسانی",
-                        style: updateBoxTextStyle,
-                      ),
-                      Text(
-                        "20:45",
-                        style: updateBoxTextStyle,
-                      ),
-                      SizedBox(
-                        width: size.width / 25,
-                      )
-                    ],
-                  ),
-                )
+                updateBox(size)
               ],
             ),
           ),
         ),
       ),
     );
+  }
+
+  AppBar appBar() {
+    return AppBar(
+      backgroundColor: SolidColors.appBarBackgroundColor,
+      elevation: 0,
+      title: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+        IconButton(
+          onPressed: () {},
+          icon: SvgPicture.asset(
+            "assets/images/money-bag-svgrepo-com 1.svg",
+            width: 35,
+            height: 35,
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(right: 12),
+          child: Text(
+            "قیمت بروز سکه و ارز",
+            style: appBarTextStyle,
+          ),
+        ),
+        Expanded(
+          child: Align(
+              alignment: Alignment.centerLeft,
+              child: IconButton(
+                onPressed: () {},
+                icon: SvgPicture.asset(
+                  "assets/images/menu-svgrepo-com 1.svg",
+                  width: 35,
+                  height: 35,
+                ),
+              )),
+        )
+      ]),
+    );
+  }
+
+  Container listViewTitle() {
+    return Container(
+      width: double.infinity,
+      height: 39,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(1000),
+          color: SolidColors.listViewTitleColor),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Text(
+            "نام آزاد ارز",
+            style: listViewTitleTextStyle,
+          ),
+          Text(
+            "قیمت",
+            style: listViewTitleTextStyle,
+          ),
+          Text(
+            "تغییرات",
+            style: listViewTitleTextStyle,
+          ),
+        ],
+      ),
+    );
+  }
+
+  SizedBox listView(Size size) {
+    return SizedBox(
+      width: double.infinity,
+      height: size.height / 1.9,
+      child: ListView.separated(
+          itemBuilder: (context, index) {
+            return Padding(
+              padding: const EdgeInsets.only(top: 20),
+              child: Container(
+                width: double.infinity,
+                height: 59,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(1000),
+                    color: Colors.white,
+                    border: Border.all(color: Colors.grey, width: 1)),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Text(
+                      "Data",
+                      style: listViewTextStyle,
+                    ),
+                    Text(
+                      "Data",
+                      style: listViewTextStyle,
+                    ),
+                    Text(
+                      "Data",
+                      style: listViewTextStyle,
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+          separatorBuilder: (context, index) {
+            return (index + 2) % 4 == 0
+                ? Padding(
+                    padding: const EdgeInsets.only(top: 20),
+                    child: Container(
+                      width: double.infinity,
+                      height: 59,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(1000),
+                          color: SolidColors.adBackGroundColor,
+                          border: Border.all(color: Colors.grey, width: 1)),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Text(
+                            "Ad",
+                            style: listViewTitleTextStyle,
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
+                : const SizedBox.shrink();
+          },
+          itemCount: 20),
+    );
+  }
+
+  Container updateBox(Size size) {
+    return Container(
+      width: double.infinity,
+      height: size.height / 15.8,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(1000),
+          color: SolidColors.updateBoxColor),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Container(
+              width: size.width / 3,
+              height: double.maxFinite,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(1000),
+                  color: SolidColors.updateBottomColor),
+              child: TextButton.icon(
+                  onPressed: () {},
+                  icon: const Icon(Icons.refresh_rounded,
+                      color: SolidColors.updateBottonIconColor, size: 30),
+                  label: Text("بروزرسانی", style: updateBottonTextStyle))),
+          Text(
+            "آخرین بروزرسانی",
+            style: updateBoxTextStyle,
+          ),
+          Text(
+            _getTime(),
+            style: updateBoxTextStyle,
+          ),
+          SizedBox(
+            width: size.width / 25,
+          )
+        ],
+      ),
+    );
+  }
+
+  String _getTime() {
+    return "20:45";
   }
 }
