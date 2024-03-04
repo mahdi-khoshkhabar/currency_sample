@@ -200,27 +200,19 @@ class MyApp extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
-                        width: size.width / 3,
-                        height: double.maxFinite,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(1000),
-                            color: SolidColors.updateBottomColor),
-                        child: Row(
-                          children: [
-                            IconButton(
-                                onPressed: () {},
-                                icon: const Icon(
-                                  Icons.refresh_rounded,
+                          width: size.width / 3,
+                          height: double.maxFinite,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(1000),
+                              color: SolidColors.updateBottomColor),
+                          child: TextButton.icon(
+                              onPressed: () {},
+                              icon: const Icon(Icons.refresh_rounded,
                                   color: SolidColors.updateBottonIconColor,
-                                  size: 30,
-                                )),
-                            Text(
-                              "بروزرسانی",
-                              style: updateBottonTextStyle,
-                            )
-                          ],
-                        ),
-                      ),
+                                  size: 30),
+                              label: Text("بروزرسانی",
+                                  style: updateBottonTextStyle))
+                          ),
                       Text(
                         "آخرین بروزرسانی",
                         style: updateBoxTextStyle,
