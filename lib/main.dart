@@ -27,55 +27,53 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
         backgroundColor: SolidColors.backgroundColor,
         appBar: appBar(),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: SafeArea(
-              child: Column(
-                children: [
-                  //headline 1, first row of main body
-                  Row(
-                    children: [
-                      //question mark
-                      SvgPicture.asset(
-                        "assets/images/question-circle-svgrepo-com 1.svg",
-                        width: 35,
-                        height: 35,
-                      ),
-                      //space
-                      const SizedBox(
-                        width: 8,
-                      ),
-                      Text(
-                        "نرخ ارز آزاد چیست؟",
-                        style: headline1TextStyle.copyWith(
-                            color: SolidColors.headline1Color),
-                      )
-                    ],
-                  ),
-                  //description
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      "نرخ ارز ها از معاملات نقدی و رایج روزانه است. معاملات نقدی معاملاتی هستند که خریدار و فروشنده به محض انجام معامله، ارز و ریال را با هم تبادل می نمایند.",
-                      style: descriptionTextStyle.copyWith(
-                          color: SolidColors.descriptionColor),
+        body: Padding(
+          padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+          child: SafeArea(
+            child: Column(
+              children: [
+                //headline 1, first row of main body
+                Row(
+                  children: [
+                    //question mark
+                    SvgPicture.asset(
+                      "assets/images/question-circle-svgrepo-com 1.svg",
+                      width: 35,
+                      height: 35,
                     ),
+                    //space
+                    const SizedBox(
+                      width: 8,
+                    ),
+                    Text(
+                      "نرخ ارز آزاد چیست؟",
+                      style: headline1TextStyle.copyWith(
+                          color: SolidColors.headline1Color),
+                    )
+                  ],
+                ),
+                //description
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    "نرخ ارز ها از معاملات نقدی و رایج روزانه است. معاملات نقدی معاملاتی هستند که خریدار و فروشنده به محض انجام معامله، ارز و ریال را با هم تبادل می نمایند.",
+                    style: descriptionTextStyle.copyWith(
+                        color: SolidColors.descriptionColor),
                   ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  //list view title
-                  listViewTitle(),
-                  //list view
-                  listView(size),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  //update box
-                  updateBox(size)
-                ],
-              ),
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                //list view title
+                listViewTitle(),
+                //list view
+                listView(size),
+                const SizedBox(
+                  height: 15,
+                ),
+                //update box
+                updateBox(size)
+              ],
             ),
           ),
         ),
@@ -149,7 +147,7 @@ class MyApp extends StatelessWidget {
   SizedBox listView(Size size) {
     return SizedBox(
       width: double.infinity,
-      height: size.height / 1.85,
+      height: size.height / 1.9,
       child: ListView.separated(
           itemBuilder: (context, index) {
             return Padding(
@@ -220,7 +218,7 @@ class MyApp extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Container(
-              width: size.width / 3,
+              width: size.width / 2.8,
               height: double.maxFinite,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(1000),

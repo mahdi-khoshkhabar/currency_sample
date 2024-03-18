@@ -1,10 +1,17 @@
 class CurrencyModel {
-  String name = "null";
-  String price = "null";
-  String change = "null";
+  String? name;
+  String? id;
+  String? title;
+  String? price;
+  String? change;
+  String? status;
+
   CurrencyModel({
     required this.name,
+    required this.id,
+    required this.title,
     required this.price,
     required this.change,
+    required this.status,
   });
 }
