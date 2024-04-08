@@ -1,15 +1,79 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:currency/component/my_colors.dart';
 import 'package:currency/component/text_style.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:currency/model/currency_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 
 class MainScreen extends StatelessWidget {
-  const MainScreen({super.key});
+  MainScreen({super.key});
+  List<CurrencyModel> currency = [];
 
   @override
   Widget build(BuildContext context) {
+    currency.add(CurrencyModel(
+        id: "1",
+        title: "یورو",
+        price: "691,900",
+        change: "(0.75%) 5,160",
+        status: "n"));
+    currency.add(
+      CurrencyModel(
+          id: "2",
+          title: "درهم امارات",
+          price: "174,440",
+          change: "(0.84%) 1,460",
+          status: "n"),
+    );
+    currency.add(CurrencyModel(
+        id: "3",
+        title: "پوند انگلیس",
+        price: "806,370",
+        change: "(0.79%) 6,380",
+        status: "n"));
+    currency.add(CurrencyModel(
+        id: "4",
+        title: "لیر ترکیه",
+        price: "20,050",
+        change: "(1%) 200",
+        status: "n"));
+    currency.add(CurrencyModel(
+        id: "5",
+        title: "فرانک سویس",
+        price: "704,300",
+        change: "(1.19%) 8,400",
+        status: "n"));
+    currency.add(CurrencyModel(
+        id: "6",
+        title: "یوان چین",
+        price: "88,200",
+        change: "(0.79%) 700",
+        status: "n"));
+    currency.add(CurrencyModel(
+        id: "7",
+        title: "ین ژاپن",
+        price: "420,210",
+        change: "(0.95%) 3,980",
+        status: "n"));
+    currency.add(CurrencyModel(
+        id: "8",
+        title: "وون کره جنوبی",
+        price: "470",
+        change: "(2.13%) 10",
+        status: "n"));
+    currency.add(CurrencyModel(
+        id: "9",
+        title: "دلار کانادا",
+        price: "470,700",
+        change: "(0.85%) 4,000",
+        status: "n"));
+    currency.add(CurrencyModel(
+        id: "10",
+        title: "دلار استرالیا",
+        price: "420,700",
+        change: "(0.57%) 2,400",
+        status: "n"));
     var size = MediaQuery.of(context).size;
     var listViewSpace = size.height / 60;
 
@@ -157,58 +221,66 @@ class MainScreen extends StatelessWidget {
             itemBuilder: (context, index) {
               return Padding(
                 padding: EdgeInsets.only(top: listViewSpaceBetween),
-                child: Container(
-                  width: double.infinity,
-                  height: 59,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(1000),
-                      color: Colors.white,
-                      border: Border.all(color: Colors.grey, width: 1)),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Text(
-                        "Data",
-                        style: listViewTextStyle,
-                      ),
-                      Text(
-                        "Data",
-                        style: listViewTextStyle,
-                      ),
-                      Text(
-                        "Data",
-                        style: listViewTextStyle,
-                      ),
-                    ],
-                  ),
-                ),
+                child: myItem(),
               );
             },
             separatorBuilder: (context, index) {
               return (index + 2) % 4 == 0
                   ? Padding(
                       padding: EdgeInsets.only(top: listViewSpaceBetween),
-                      child: Container(
-                        width: double.infinity,
-                        height: 59,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(1000),
-                            color: SolidColors.adBackGroundColor,
-                            border: Border.all(color: Colors.grey, width: 1)),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Text(
-                              "Ad",
-                              style: listViewTitleTextStyle,
-                            ),
-                          ],
-                        ),
-                      ),
+                      child: ad(),
                     )
                   : const SizedBox.shrink();
             },
-            itemCount: 20),
+            itemCount: currency.length),
+      ),
+    );
+  }
+
+  Container ad() {
+    return Container(
+      width: double.infinity,
+      height: 59,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(1000),
+          color: SolidColors.adBackGroundColor,
+          border: Border.all(color: Colors.grey, width: 1)),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Text(
+            "Ad",
+            style: listViewTitleTextStyle,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Container myItem() {
+    return Container(
+      width: double.infinity,
+      height: 59,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(1000),
+          color: Colors.white,
+          border: Border.all(color: Colors.grey, width: 1)),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Text(
+            "Data",
+            style: listViewTextStyle,
+          ),
+          Text(
+            "Data",
+            style: listViewTextStyle,
+          ),
+          Text(
+            "Data",
+            style: listViewTextStyle,
+          ),
+        ],
       ),
     );
   }
