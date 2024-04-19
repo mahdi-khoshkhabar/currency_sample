@@ -5,6 +5,7 @@ import 'package:currency/component/text_style.dart';
 import 'package:currency/model/currency_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:expandable_text/expandable_text.dart';
 
 class MainScreen extends StatelessWidget {
   MainScreen({super.key});
@@ -75,69 +76,73 @@ class MainScreen extends StatelessWidget {
         change: "(0.57%) 2,400",
         status: "n"));
     var size = MediaQuery.of(context).size;
-    var listViewSpace = size.height / 60;
 
     return Scaffold(
       backgroundColor: SolidColors.backgroundColor,
       appBar: appBar(),
-      body: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-        child: SafeArea(
-          child: Align(
-            alignment: Alignment.center,
-            child: Column(
-              children: [
-                //headline 1, first row of main body
-                ConstrainedBox(
-                  constraints: const BoxConstraints(maxWidth: 500),
-                  child: Row(
-                    children: [
-                      //question mark
-                      SvgPicture.asset(
-                        "assets/images/question-circle-svgrepo-com 1.svg",
-                        width: 35,
-                        height: 35,
-                      ),
-                      //space
-                      const SizedBox(
-                        width: 8,
-                      ),
-                      ConstrainedBox(
-                        constraints: const BoxConstraints(maxWidth: 200),
-                        child: Text(
-                          "نرخ ارز آزاد چیست؟",
-                          style: headline1TextStyle.copyWith(
-                              color: SolidColors.headline1Color),
+      body: LayoutBuilder(
+        builder: (context, constraints) => Padding(
+          padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+          child: SafeArea(
+            child: Align(
+              alignment: Alignment.center,
+              child: Column(
+                children: [
+                  //headline 1, first row of main body
+                  ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 500),
+                    child: Row(
+                      children: [
+                        //question mark
+                        SvgPicture.asset(
+                          "assets/images/question-circle-svgrepo-com 1.svg",
+                          width: 35,
+                          height: 35,
                         ),
-                      )
-                    ],
-                  ),
-                ),
-                //description
-                ConstrainedBox(
-                  constraints: const BoxConstraints(maxWidth: 500),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      "نرخ ارز ها از معاملات نقدی و رایج روزانه است. معاملات نقدی معاملاتی هستند که خریدار و فروشنده به محض انجام معامله، ارز و ریال را با هم تبادل می نمایند.",
-                      style: descriptionTextStyle.copyWith(
-                          color: SolidColors.descriptionColor),
+                        //space
+                        const SizedBox(
+                          width: 8,
+                        ),
+                        ConstrainedBox(
+                          constraints: const BoxConstraints(maxWidth: 200),
+                          child: Text(
+                            "نرخ ارز آزاد چیست؟",
+                            style: headline1TextStyle.copyWith(
+                                color: SolidColors.headline1Color),
+                          ),
+                        )
+                      ],
                     ),
                   ),
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-                //list view title
-                listViewTitle(),
-                //list view
-                listView(size, listViewSpace),
-                SizedBox(
-                  height: listViewSpace,
-                ),
-                //update box
-                updateBox(size)
-              ],
+                  //description
+                  ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 500),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ExpandableText(
+                        "نرخ ارز ها از معاملات نقدی و رایج روزانه است. معاملات نقدی معاملاتی هستند که خریدار و فروشنده به محض انجام معامله، ارز و ریال را با هم تبادل می نمایند.",
+                        maxLines: 2,
+                        expandText: "show more",
+                        collapseText: "show less",
+                        style: descriptionTextStyle.copyWith(
+                            color: SolidColors.descriptionColor),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  //list view title
+                  listViewTitle(),
+                  //list view
+                  listView(size, constraints.maxHeight),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  //update box
+                  updateBox(size)
+                ],
+              ),
             ),
           ),
         ),
@@ -183,7 +188,9 @@ class MainScreen extends StatelessWidget {
 
   listViewTitle() {
     return ConstrainedBox(
-      constraints: const BoxConstraints(maxWidth: 500, minWidth: 100),
+      constraints: const BoxConstraints(
+        maxWidth: 500,
+      ),
       child: Container(
         width: double.infinity,
         height: 39,
@@ -211,23 +218,23 @@ class MainScreen extends StatelessWidget {
     );
   }
 
-  listView(Size size, double listViewSpaceBetween) {
+  listView(Size size, var maxHeight) {
     return ConstrainedBox(
-      constraints: const BoxConstraints(maxWidth: 500, minWidth: 100),
+      constraints: const BoxConstraints(maxWidth: 500),
       child: SizedBox(
         width: double.infinity,
-        height: size.height / 2,
+        height: maxHeight - 270,
         child: ListView.separated(
             itemBuilder: (context, index) {
               return Padding(
-                padding: EdgeInsets.only(top: listViewSpaceBetween),
+                padding: const EdgeInsets.only(top: 8),
                 child: myItem(),
               );
             },
             separatorBuilder: (context, index) {
               return (index + 2) % 4 == 0
                   ? Padding(
-                      padding: EdgeInsets.only(top: listViewSpaceBetween),
+                      padding: const EdgeInsets.only(top: 8),
                       child: ad(),
                     )
                   : const SizedBox.shrink();
@@ -287,10 +294,10 @@ class MainScreen extends StatelessWidget {
 
   updateBox(Size size) {
     return ConstrainedBox(
-      constraints: const BoxConstraints(maxWidth: 500, minWidth: 100),
+      constraints: const BoxConstraints(maxWidth: 500),
       child: Container(
         width: double.infinity,
-        height: size.height / 16,
+        height: 55,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(1000),
             color: SolidColors.updateBoxColor),
@@ -332,3 +339,10 @@ class MainScreen extends StatelessWidget {
     return "20:45";
   }
 }
+//TODO: wrap the description with listView for responsivity
+
+//TODO: update before starting the code
+
+
+
+
