@@ -11,14 +11,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
+    return   const MaterialApp(
       title: 'Localizations my App',
-      localizationsDelegates: const [
+      localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      supportedLocales: const [
+      supportedLocales: [
         Locale('fa'), // Farsi
       ],
       home: MainScreen(),

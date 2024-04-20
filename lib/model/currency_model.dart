@@ -1,9 +1,9 @@
 class CurrencyModel {
-  late String id;
-  late String title;
-  late String price;
-  late String change;
-  late String status;
+  String? id;
+  String? title;
+  String? price;
+  String? change;
+  String? status;
 
   CurrencyModel({
     required this.id,

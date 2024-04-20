@@ -6,76 +6,23 @@ import 'package:currency/model/currency_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:expandable_text/expandable_text.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert' as convert;
 
-class MainScreen extends StatelessWidget {
-  MainScreen({super.key});
-  List<CurrencyModel> currency = [];
+class MainScreen extends StatefulWidget {
+  const MainScreen({super.key});
+
+  @override
+  State<MainScreen> createState() => _MainScreenState();
+}
+
+class _MainScreenState extends State<MainScreen> {
+  List<CurrencyModel> currencyList = [];
 
   @override
   Widget build(BuildContext context) {
-    currency.add(CurrencyModel(
-        id: "1",
-        title: "یورو",
-        price: "691,900",
-        change: "(0.75%) 5,160",
-        status: "n"));
-    currency.add(
-      CurrencyModel(
-          id: "2",
-          title: "درهم امارات",
-          price: "174,440",
-          change: "(0.84%) 1,460",
-          status: "n"),
-    );
-    currency.add(CurrencyModel(
-        id: "3",
-        title: "پوند انگلیس",
-        price: "806,370",
-        change: "(0.79%) 6,380",
-        status: "n"));
-    currency.add(CurrencyModel(
-        id: "4",
-        title: "لیر ترکیه",
-        price: "20,050",
-        change: "(1%) 200",
-        status: "n"));
-    currency.add(CurrencyModel(
-        id: "5",
-        title: "فرانک سویس",
-        price: "704,300",
-        change: "(1.19%) 8,400",
-        status: "n"));
-    currency.add(CurrencyModel(
-        id: "6",
-        title: "یوان چین",
-        price: "88,200",
-        change: "(0.79%) 700",
-        status: "n"));
-    currency.add(CurrencyModel(
-        id: "7",
-        title: "ین ژاپن",
-        price: "420,210",
-        change: "(0.95%) 3,980",
-        status: "n"));
-    currency.add(CurrencyModel(
-        id: "8",
-        title: "وون کره جنوبی",
-        price: "470",
-        change: "(2.13%) 10",
-        status: "n"));
-    currency.add(CurrencyModel(
-        id: "9",
-        title: "دلار کانادا",
-        price: "470,700",
-        change: "(0.85%) 4,000",
-        status: "n"));
-    currency.add(CurrencyModel(
-        id: "10",
-        title: "دلار استرالیا",
-        price: "420,700",
-        change: "(0.57%) 2,400",
-        status: "n"));
     var size = MediaQuery.of(context).size;
+    getResponse();
 
     return Scaffold(
       backgroundColor: SolidColors.backgroundColor,
@@ -86,62 +33,67 @@ class MainScreen extends StatelessWidget {
           child: SafeArea(
             child: Align(
               alignment: Alignment.center,
-              child: Column(
-                children: [
-                  //headline 1, first row of main body
-                  ConstrainedBox(
-                    constraints: const BoxConstraints(maxWidth: 500),
-                    child: Row(
-                      children: [
-                        //question mark
-                        SvgPicture.asset(
-                          "assets/images/question-circle-svgrepo-com 1.svg",
-                          width: 35,
-                          height: 35,
-                        ),
-                        //space
-                        const SizedBox(
-                          width: 8,
-                        ),
-                        ConstrainedBox(
-                          constraints: const BoxConstraints(maxWidth: 200),
-                          child: Text(
-                            "نرخ ارز آزاد چیست؟",
-                            style: headline1TextStyle.copyWith(
-                                color: SolidColors.headline1Color),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    //headline 1, first row of main body
+                    ConstrainedBox(
+                      constraints: const BoxConstraints(maxWidth: 500),
+                      child: Row(
+                        children: [
+                          //question mark
+                          SvgPicture.asset(
+                            "assets/images/question-circle-svgrepo-com 1.svg",
+                            width: 35,
+                            height: 35,
                           ),
-                        )
-                      ],
-                    ),
-                  ),
-                  //description
-                  ConstrainedBox(
-                    constraints: const BoxConstraints(maxWidth: 500),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: ExpandableText(
-                        "نرخ ارز ها از معاملات نقدی و رایج روزانه است. معاملات نقدی معاملاتی هستند که خریدار و فروشنده به محض انجام معامله، ارز و ریال را با هم تبادل می نمایند.",
-                        maxLines: 2,
-                        expandText: "show more",
-                        collapseText: "show less",
-                        style: descriptionTextStyle.copyWith(
-                            color: SolidColors.descriptionColor),
+                          //space
+                          const SizedBox(
+                            width: 8,
+                          ),
+                          ConstrainedBox(
+                            constraints: const BoxConstraints(maxWidth: 200),
+                            child: Text(
+                              "نرخ ارز آزاد چیست؟",
+                              style: headline1TextStyle.copyWith(
+                                  color: SolidColors.headline1Color),
+                            ),
+                          )
+                        ],
                       ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  //list view title
-                  listViewTitle(),
-                  //list view
-                  listView(size, constraints.maxHeight),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  //update box
-                  updateBox(size)
-                ],
+                    //description
+                    ConstrainedBox(
+                      constraints: const BoxConstraints(maxWidth: 500),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ExpandableText(
+                          "نرخ ارز ها از معاملات نقدی و رایج روزانه است. معاملات نقدی معاملاتی هستند که خریدار و فروشنده به محض انجام معامله، ارز و ریال را با هم تبادل می نمایند.",
+                          maxLines: 2,
+                          expandText: "show more",
+                          collapseText: "show less",
+                          style: descriptionTextStyle.copyWith(
+                              color: SolidColors.descriptionColor),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    //list view title
+                    listViewTitle(),
+                    //list view
+                    listView(
+                      size,
+                      constraints.maxHeight,
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    //update box
+                    updateBox(size)
+                  ],
+                ),
               ),
             ),
           ),
@@ -218,76 +170,80 @@ class MainScreen extends StatelessWidget {
     );
   }
 
-  listView(Size size, var maxHeight) {
+  listView(Size size, var maxHeightOfConstraints) {
     return ConstrainedBox(
       constraints: const BoxConstraints(maxWidth: 500),
       child: SizedBox(
         width: double.infinity,
-        height: maxHeight - 270,
+        height: maxHeightOfConstraints - 290,
         child: ListView.separated(
             itemBuilder: (context, index) {
-              return Padding(
-                padding: const EdgeInsets.only(top: 8),
-                child: myItem(),
-              );
+              return myItem(index);
             },
             separatorBuilder: (context, index) {
-              return (index + 2) % 4 == 0
-                  ? Padding(
-                      padding: const EdgeInsets.only(top: 8),
-                      child: ad(),
-                    )
-                  : const SizedBox.shrink();
+              return (index + 2) % 5 == 0 ? ad() : const SizedBox.shrink();
             },
-            itemCount: currency.length),
+            itemCount: currencyList.length),
       ),
     );
   }
 
-  Container ad() {
-    return Container(
-      width: double.infinity,
-      height: 59,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(1000),
-          color: SolidColors.adBackGroundColor,
-          border: Border.all(color: Colors.grey, width: 1)),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Text(
-            "Ad",
-            style: listViewTitleTextStyle,
-          ),
-        ],
+  Padding ad() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 8),
+      child: Container(
+        width: double.infinity,
+        height: 59,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(1000),
+            color: SolidColors.adBackGroundColor,
+            border: Border.all(color: Colors.grey, width: 1)),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Text(
+              "Ad",
+              style: listViewTitleTextStyle,
+            ),
+          ],
+        ),
       ),
     );
   }
 
-  Container myItem() {
-    return Container(
-      width: double.infinity,
-      height: 59,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(1000),
-          color: Colors.white,
-          border: Border.all(color: Colors.grey, width: 1)),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Text(
-            "Data",
-            style: listViewTextStyle,
-          ),
-          Text(
-            "Data",
-            style: listViewTextStyle,
-          ),
-          Text(
-            "Data",
-            style: listViewTextStyle,
-          ),
-        ],
+  Padding myItem(index) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 8),
+      child: Container(
+        width: double.infinity,
+        height: 59,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(1000),
+            color: Colors.white,
+            border: Border.all(color: Colors.grey, width: 1)),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            alignText(currencyList[index].title!),
+            alignText(currencyList[index].price!),
+            alignText(currencyList[index].change!),
+          ],
+        ),
+      ),
+    );
+  }
+
+  SizedBox alignText(
+    String myText,
+  ) {
+    return SizedBox(
+      width: 100,
+      child: Align(
+        alignment: Alignment.center,
+        child: Text(
+          myText,
+          style: listViewTextStyle,
+        ),
       ),
     );
   }
@@ -338,11 +294,28 @@ class MainScreen extends StatelessWidget {
   String _getTime() {
     return "20:45";
   }
+
+  getResponse() {
+    var url =
+        "https://sasansafari.com/flutter/api.php?access_key=flutter123456";
+    http.get(Uri.parse(url)).then((value) {
+      if (currencyList.isEmpty){
+        if (value.statusCode == 200) {
+        List jsonList = convert.jsonDecode(value.body);
+        if (jsonList.isNotEmpty) {
+          for (int i = 0; i < jsonList.length; i++) {
+            setState(() {
+              currencyList.add(CurrencyModel(
+                  id: jsonList[i]["id"],
+                  title: jsonList[i]["title"],
+                  price: jsonList[i]["price"],
+                  change: jsonList[i]["changes"],
+                  status: jsonList[i]["status"]));
+            });
+          }
+        }
+      }
+      }
+    });
+  }
 }
-//TODO: wrap the description with listView for responsivity
-
-//TODO: update before starting the code
-
-
-
-
