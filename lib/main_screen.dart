@@ -226,7 +226,18 @@ class _MainScreenState extends State<MainScreen> {
           children: [
             alignText(currencyList[index].title!),
             alignText(currencyList[index].price!),
-            alignText(currencyList[index].change!),
+            SizedBox(
+              width: 100,
+              child: Align(
+                alignment: Alignment.center,
+                child: Text(
+                  currencyList[index].change!,
+                  style: currencyList[index].status == "n"
+                      ? listViewTextStyle.copyWith(color: Colors.red)
+                      : listViewTextStyle.copyWith(color: Colors.green),
+                ),
+              ),
+            ),
           ],
         ),
       ),
@@ -299,22 +310,22 @@ class _MainScreenState extends State<MainScreen> {
     var url =
         "https://sasansafari.com/flutter/api.php?access_key=flutter123456";
     http.get(Uri.parse(url)).then((value) {
-      if (currencyList.isEmpty){
+      if (currencyList.isEmpty) {
         if (value.statusCode == 200) {
-        List jsonList = convert.jsonDecode(value.body);
-        if (jsonList.isNotEmpty) {
-          for (int i = 0; i < jsonList.length; i++) {
-            setState(() {
-              currencyList.add(CurrencyModel(
-                  id: jsonList[i]["id"],
-                  title: jsonList[i]["title"],
-                  price: jsonList[i]["price"],
-                  change: jsonList[i]["changes"],
-                  status: jsonList[i]["status"]));
-            });
+          List jsonList = convert.jsonDecode(value.body);
+          if (jsonList.isNotEmpty) {
+            for (int i = 0; i < jsonList.length; i++) {
+              setState(() {
+                currencyList.add(CurrencyModel(
+                    id: jsonList[i]["id"],
+                    title: jsonList[i]["title"],
+                    price: jsonList[i]["price"],
+                    change: jsonList[i]["changes"],
+                    status: jsonList[i]["status"]));
+              });
+            }
           }
         }
-      }
       }
     });
   }
